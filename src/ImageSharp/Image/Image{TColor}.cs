@@ -391,25 +391,18 @@ namespace ImageSharp
                 throw new NotSupportedException("Cannot read from the stream.");
             }
 
-            if (stream.CanSeek)
+            if (this.Configuration.PeekStream)
             {
-                if (this.Decode(stream))
+                if (this.DecodePeek(stream))
                 {
                     return;
                 }
             }
             else
             {
-                // We want to be able to load images from things like HttpContext.Request.Body
-                using (MemoryStream ms = new MemoryStream())
+                if (this.Decode(stream))
                 {
-                    stream.CopyTo(ms);
-                    ms.Position = 0;
-
-                    if (this.Decode(ms))
-                    {
-                        return;
-                    }
+                    return;
                 }
             }
 
@@ -433,6 +426,17 @@ namespace ImageSharp
         /// </returns>
         private bool Decode(Stream stream)
         {
+            if (!stream.CanSeek)
+            {
+                // We want to be able to load images from things like HttpContext.Request.Body
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    stream.CopyTo(ms);
+                    ms.Position = 0;
+                    return this.Decode(ms);
+                }
+            }
+
             int maxHeaderSize = this.Configuration.MaxHeaderSize;
             if (maxHeaderSize <= 0)
             {
@@ -461,6 +465,39 @@ namespace ImageSharp
             format.Decoder.Decode(this, stream);
             this.CurrentImageFormat = format;
             return true;
+        }
+
+        private bool DecodePeek(Stream srcStream)
+        {
+            using (IO.PeekableStream stream = new IO.PeekableStream(srcStream, false))
+            {
+                int maxHeaderSize = this.Configuration.MaxHeaderSize;
+                if (maxHeaderSize <= 0)
+                {
+                    return false;
+                }
+
+                IImageFormat format;
+                byte[] header = ArrayPool<byte>.Shared.Rent(maxHeaderSize);
+                try
+                {
+                    stream.Peek(header, 0, maxHeaderSize);
+                    format = this.Configuration.ImageFormats.FirstOrDefault(x => x.IsSupportedFileFormat(header));
+                }
+                finally
+                {
+                    ArrayPool<byte>.Shared.Return(header);
+                }
+
+                if (format == null)
+                {
+                    return false;
+                }
+
+                format.Decoder.Decode(this, stream);
+                this.CurrentImageFormat = format;
+                return true;
+            }
         }
     }
 }

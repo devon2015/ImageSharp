@@ -34,6 +34,30 @@ namespace ImageSharp
         private readonly List<IImageFormat> imageFormatsList = new List<IImageFormat>();
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Configuration" /> class.
+        /// </summary>
+        public Configuration()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Configuration"/> class.
+        /// </summary>
+        /// <param name="prototype">The prototype.</param>
+        public Configuration(Configuration prototype)
+        {
+            this.imageFormatsList.AddRange(prototype.imageFormatsList);
+            this.MaxHeaderSize = prototype.MaxHeaderSize;
+            this.PeekStream = prototype.PeekStream;
+            this.ParallelOptions = new ParallelOptions
+            {
+                TaskScheduler = prototype.ParallelOptions.TaskScheduler,
+                CancellationToken = prototype.ParallelOptions.CancellationToken,
+                MaxDegreeOfParallelism = prototype.ParallelOptions.MaxDegreeOfParallelism
+            };
+        }
+
+        /// <summary>
         /// Gets the default <see cref="Configuration"/> instance.
         /// </summary>
         public static Configuration Default { get; } = Lazy.Value;
@@ -47,6 +71,17 @@ namespace ImageSharp
         /// Gets the global parallel options for processing tasks in parallel.
         /// </summary>
         public ParallelOptions ParallelOptions { get; } = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount };
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [peek stream].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [peek stream]; otherwise, <c>false</c>.
+        /// </value>
+        /// <remarks>
+        /// Leave this opt in for now.
+        /// </remarks>
+        internal bool PeekStream { get; set; } = false;
 
         /// <summary>
         /// Gets the maximum header size of all formats.

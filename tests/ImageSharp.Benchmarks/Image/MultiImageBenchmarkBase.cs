@@ -117,11 +117,11 @@ namespace ImageSharp.Benchmarks.Image
         /// Execute code for each image stream. If the returned object of the opearation <see cref="Func{T, TResult}"/> is <see cref="IDisposable"/> it will be disposed.
         /// </summary>
         /// <param name="operation">The operation to execute. If the returned object is &lt;see cref="IDisposable"/&gt; it will be disposed </param>
-        protected void ForEachStream(Func<MemoryStream, object> operation)
+        protected void ForEachStream(Func<StreamingMemoryStream, object> operation)
         {
             foreach (var kv in this.FileNames2Bytes)
             {
-                using (MemoryStream memoryStream = new MemoryStream(kv.Value))
+                using (StreamingMemoryStream memoryStream = new StreamingMemoryStream(kv.Value))
                 {
                     try
                     {
@@ -148,13 +148,13 @@ namespace ImageSharp.Benchmarks.Image
                     byte[] bytes = kv.Value;
                     string fn = kv.Key;
 
-                    using (var ms1 = new MemoryStream(bytes))
+                    using (var ms1 = new StreamingMemoryStream(bytes))
                     {
                         this.FileNamesToImageSharpImages[fn] = new Image(ms1);
 
                     }
 
-                    this.FileNamesToSystemDrawingImages[fn] = new Bitmap(new MemoryStream(bytes));
+                    this.FileNamesToSystemDrawingImages[fn] = new Bitmap(new StreamingMemoryStream(bytes));
                 }
             }
 
