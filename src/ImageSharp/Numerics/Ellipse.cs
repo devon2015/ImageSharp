@@ -12,7 +12,7 @@ namespace ImageSharp
     /// <summary>
     /// Represents an ellipse.
     /// </summary>
-    public struct Ellipse : IEquatable<Ellipse>
+    internal struct Ellipse : IEquatable<Ellipse>
     {
         /// <summary>
         /// Represents a <see cref="Ellipse"/> that has X and Y values set to zero.

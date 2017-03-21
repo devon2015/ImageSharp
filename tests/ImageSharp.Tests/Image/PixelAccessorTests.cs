@@ -43,7 +43,7 @@ namespace ImageSharp.Tests
         [WithMemberFactory(nameof(CreateTestImage), PixelTypes.All, ComponentOrder.Zyx)]
         [WithMemberFactory(nameof(CreateTestImage), PixelTypes.All, ComponentOrder.Xyzw)]
         [WithMemberFactory(nameof(CreateTestImage), PixelTypes.All, ComponentOrder.Zyxw)]
-        public void CopyTo_Then_CopyFrom_OnFullImageRect<TColor>(TestImageProvider<TColor> provider, ComponentOrder order)
+        internal void CopyTo_Then_CopyFrom_OnFullImageRect<TColor>(TestImageProvider<TColor> provider, ComponentOrder order)
             where TColor : struct, IPixel<TColor>
         {
             using (Image<TColor> src = provider.GetImage())
@@ -89,7 +89,7 @@ namespace ImageSharp.Tests
         [WithBlankImages(16, 16, PixelTypes.All, ComponentOrder.Zyx)]
         [WithBlankImages(16, 16, PixelTypes.All, ComponentOrder.Xyzw)]
         [WithBlankImages(16, 16, PixelTypes.All, ComponentOrder.Zyxw)]
-        public void CopyToThenCopyFromWithOffset<TColor>(TestImageProvider<TColor> provider, ComponentOrder order)
+        internal void CopyToThenCopyFromWithOffset<TColor>(TestImageProvider<TColor> provider, ComponentOrder order)
             where TColor : struct, IPixel<TColor>
         {
             using (Image<TColor> destImage = new Image<TColor>(8, 8))

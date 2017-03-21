@@ -12,7 +12,7 @@ namespace ImageSharp.Quantizers
     /// Represents a quantized image where the pixels indexed by a color palette.
     /// </summary>
     /// <typeparam name="TColor">The pixel format.</typeparam>
-    public class QuantizedImage<TColor>
+    public sealed class QuantizedImage<TColor>
         where TColor : struct, IPixel<TColor>
     {
         /// <summary>

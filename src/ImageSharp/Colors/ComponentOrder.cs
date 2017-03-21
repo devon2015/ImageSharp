@@ -8,7 +8,7 @@ namespace ImageSharp
     /// <summary>
     /// Enumerates the various component orders.
     /// </summary>
-    public enum ComponentOrder
+    internal enum ComponentOrder
     {
         /// <summary>
         /// Z-> Y-> X order. Equivalent to B-> G-> R in <see cref="Color"/>

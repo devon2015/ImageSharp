@@ -11,11 +11,6 @@ namespace ImageSharp
     public interface IImageBase
     {
         /// <summary>
-        /// Gets the <see cref="Rectangle"/> representing the bounds of the image.
-        /// </summary>
-        Rectangle Bounds { get; }
-
-        /// <summary>
         /// Gets the width in pixels.
         /// </summary>
         int Width { get; }
@@ -24,15 +19,5 @@ namespace ImageSharp
         /// Gets the height in pixels.
         /// </summary>
         int Height { get; }
-
-        /// <summary>
-        /// Gets the pixel ratio made up of the width and height.
-        /// </summary>
-        double PixelRatio { get; }
-
-        /// <summary>
-        /// Gets the configuration providing initialization code which allows extending the library.
-        /// </summary>
-        Configuration Configuration { get; }
     }
 }

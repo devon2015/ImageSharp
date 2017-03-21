@@ -10,7 +10,7 @@ namespace ImageSharp.Processing
     /// <see href="https://en.wikipedia.org/wiki/Bicubic_interpolation#Bicubic_convolution_algorithm">Wikipedia</see>
     /// A commonly used algorithm within imageprocessing that preserves sharpness better than triangle interpolation.
     /// </summary>
-    public class BicubicResampler : IResampler
+    public sealed class BicubicResampler : IResampler
     {
         /// <inheritdoc/>
         public float Radius => 2;

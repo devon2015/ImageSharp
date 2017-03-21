@@ -10,7 +10,7 @@ namespace ImageSharp.Processing
     /// This filter rounds off strong edges while preserving flat 'color levels' in the original image.
     /// <see href="http://www.imagemagick.org/Usage/filter/#cubic_bc"/>
     /// </summary>
-    public class HermiteResampler : IResampler
+    public sealed class HermiteResampler : IResampler
     {
         /// <inheritdoc/>
         public float Radius => 2;

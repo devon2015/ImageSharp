@@ -94,7 +94,6 @@ namespace ImageSharp
 
             this.Width = other.Width;
             this.Height = other.Height;
-            this.CopyProperties(other);
 
             // Rent then copy the pixels. Unsafe.CopyBlock gives us a nice speed boost here.
             this.RentPixels();
@@ -115,16 +114,15 @@ namespace ImageSharp
         /// <inheritdoc/>
         public int Height { get; private set; }
 
-        /// <inheritdoc/>
-        public double PixelRatio => (double)this.Width / this.Height;
-
-        /// <inheritdoc/>
-        public Rectangle Bounds => new Rectangle(0, 0, this.Width, this.Height);
-
         /// <summary>
         /// Gets the configuration providing initialization code which allows extending the library.
         /// </summary>
-        public Configuration Configuration { get; private set; }
+        internal Configuration Configuration { get; private set; }
+
+        /// <summary>
+        /// Gets the <see cref="Rectangle"/> representing the bounds of the image.
+        /// </summary>
+        internal Rectangle Bounds => new Rectangle(0, 0, this.Width, this.Height);
 
         /// <summary>
         /// Applies the processor.
@@ -171,19 +169,6 @@ namespace ImageSharp
             this.Width = newWidth;
             this.Height = newHeight;
             this.pixelBuffer = newPixels;
-        }
-
-        /// <summary>
-        /// Copies the properties from the other <see cref="IImageBase"/>.
-        /// </summary>
-        /// <param name="other">
-        /// The other <see cref="IImageBase"/> to copy the properties from.
-        /// </param>
-        protected void CopyProperties(IImageBase other)
-        {
-            DebugGuard.NotNull(other, nameof(other));
-
-            this.Configuration = other.Configuration;
         }
 
         /// <summary>

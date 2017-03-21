@@ -13,7 +13,7 @@ namespace ImageSharp.Formats.Jpg
         /// <summary>
         /// Contains pointers to the memory regions of <see cref="ComputationData"/> so they can be easily passed around to pointer based utility methods of <see cref="Block8x8F"/>
         /// </summary>
-        public struct DataPointers
+        internal struct DataPointers
         {
             /// <summary>
             /// Pointer to <see cref="ComputationData.Block"/>

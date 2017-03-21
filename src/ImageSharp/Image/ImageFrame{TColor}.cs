@@ -55,13 +55,13 @@ namespace ImageSharp
         /// <param name="scaleFunc">A function that allows for the correction of vector scaling between unknown color formats.</param>
         /// <typeparam name="TColor2">The pixel format.</typeparam>
         /// <returns>The <see cref="ImageFrame{TColor2}"/></returns>
-        public ImageFrame<TColor2> To<TColor2>(Func<Vector4, Vector4> scaleFunc = null)
+        internal ImageFrame<TColor2> To<TColor2>(Func<Vector4, Vector4> scaleFunc = null)
             where TColor2 : struct, IPixel<TColor2>
         {
             scaleFunc = PackedPixelConverterHelper.ComputeScaleFunction<TColor, TColor2>(scaleFunc);
 
             ImageFrame<TColor2> target = new ImageFrame<TColor2>(this.Width, this.Height, this.Configuration);
-            target.CopyProperties(this);
+            target.MetaData = new ImageFrameMetaData(this.MetaData);
 
             using (PixelAccessor<TColor> pixels = this.Lock())
             using (PixelAccessor<TColor2> targetPixels = target.Lock())
@@ -91,19 +91,6 @@ namespace ImageSharp
         internal virtual ImageFrame<TColor> Clone()
         {
             return new ImageFrame<TColor>(this);
-        }
-
-        /// <summary>
-        /// Copies the properties from the other <see cref="IImageFrame"/>.
-        /// </summary>
-        /// <param name="other">
-        /// The other <see cref="IImageFrame"/> to copy the properties from.
-        /// </param>
-        private void CopyProperties(IImageFrame other)
-        {
-            base.CopyProperties(other);
-
-            this.MetaData = new ImageFrameMetaData(other.MetaData);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace ImageSharp.Processing
     /// Bilinear interpolation can be used where perfect image transformation with pixel matching is impossible,
     /// so that one can calculate and assign appropriate intensity values to pixels.
     /// </summary>
-    public class TriangleResampler : IResampler
+    public sealed class TriangleResampler : IResampler
     {
         /// <inheritdoc/>
         public float Radius => 1;

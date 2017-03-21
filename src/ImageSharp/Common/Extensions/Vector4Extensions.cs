@@ -12,7 +12,7 @@ namespace ImageSharp
     /// <summary>
     /// Extension methods for the <see cref="Vector4"/> struct.
     /// </summary>
-    public static class Vector4Extensions
+    internal static class Vector4Extensions
     {
         /// <summary>
         /// Compresses a linear color signal to its sRGB equivalent.

@@ -52,7 +52,7 @@ namespace ImageSharp
         public static Image<TColor> DrawText<TColor>(this Image<TColor> source, string text, Font font, TColor color, Vector2 location, TextGraphicsOptions options)
            where TColor : struct, IPixel<TColor>
         {
-            return source.DrawText(text, font, Brushes<TColor>.Solid(color), null, location, options);
+            return source.DrawText(text, font, Brushes.Solid(color), null, location, options);
         }
 
         /// <summary>

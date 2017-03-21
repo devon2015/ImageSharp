@@ -62,7 +62,7 @@ namespace ImageSharp.Formats.Jpg
         /// <summary>
         /// Encapsulates methods throwing different flavours of <see cref="ImageFormatException"/>-s.
         /// </summary>
-        public static class ThrowImageFormatException
+        internal static class ThrowImageFormatException
         {
             /// <summary>
             /// Throws "Fill called when unread bytes exist".

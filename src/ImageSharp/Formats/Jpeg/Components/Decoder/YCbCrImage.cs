@@ -52,7 +52,7 @@ namespace ImageSharp.Formats.Jpg
         /// <summary>
         /// Provides enumeration of the various available subsample ratios.
         /// </summary>
-        public enum YCbCrSubsampleRatio
+        internal enum YCbCrSubsampleRatio
         {
             /// <summary>
             /// YCbCrSubsampleRatio444

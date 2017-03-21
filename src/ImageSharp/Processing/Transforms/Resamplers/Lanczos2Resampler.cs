@@ -10,7 +10,7 @@ namespace ImageSharp.Processing
     /// <see href="https://en.wikipedia.org/wiki/Lanczos_resampling#Algorithm">Wikipedia</see>
     /// with a radius of 2 pixels.
     /// </summary>
-    public class Lanczos2Resampler : IResampler
+    public sealed class Lanczos2Resampler : IResampler
     {
         /// <inheritdoc/>
         public float Radius => 2;

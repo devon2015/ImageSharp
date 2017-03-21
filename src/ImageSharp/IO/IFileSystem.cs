@@ -7,11 +7,11 @@ namespace ImageSharp.IO
 {
     using System.IO;
 
- #if !NETSTANDARD1_1
+#if !NETSTANDARD1_1
     /// <summary>
     /// A simple interface representing the filesystem.
     /// </summary>
-    public interface IFileSystem
+    internal interface IFileSystem
     {
         /// <summary>
         /// Returns a readable stream as defined by the path.

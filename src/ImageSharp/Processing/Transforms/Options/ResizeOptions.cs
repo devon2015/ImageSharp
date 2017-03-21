@@ -11,7 +11,7 @@ namespace ImageSharp.Processing
     /// <summary>
     /// The resize options for resizing images against certain modes.
     /// </summary>
-    public class ResizeOptions
+    public sealed class ResizeOptions
     {
         /// <summary>
         /// Gets or sets the resize mode.

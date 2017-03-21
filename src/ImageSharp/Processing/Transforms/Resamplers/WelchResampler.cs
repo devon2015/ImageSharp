@@ -9,7 +9,7 @@ namespace ImageSharp.Processing
     /// The function implements the welch algorithm.
     /// <see href="http://www.imagemagick.org/Usage/filter/"/>
     /// </summary>
-    public class WelchResampler : IResampler
+    public sealed class WelchResampler : IResampler
     {
         /// <inheritdoc/>
         public float Radius => 3;

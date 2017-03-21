@@ -9,7 +9,7 @@ namespace ImageSharp.Processing
     /// The function implements the spline algorithm.
     /// <see href="http://www.imagemagick.org/Usage/filter/#cubic_bc"/>
     /// </summary>
-    public class SplineResampler : IResampler
+    public sealed class SplineResampler : IResampler
     {
         /// <inheritdoc/>
         public float Radius => 2;

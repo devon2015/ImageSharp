@@ -9,7 +9,7 @@ namespace ImageSharp.Processing
     /// The function implements the Robidoux algorithm.
     /// <see href="http://www.imagemagick.org/Usage/filter/#robidoux"/>
     /// </summary>
-    public class RobidouxResampler : IResampler
+    public sealed class RobidouxResampler : IResampler
     {
         /// <inheritdoc/>
         public float Radius => 2;

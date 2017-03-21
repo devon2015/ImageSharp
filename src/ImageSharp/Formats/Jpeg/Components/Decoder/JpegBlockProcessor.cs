@@ -80,7 +80,7 @@ namespace ImageSharp.Formats.Jpg
         /// Holds the "large" data blocks needed for computations.
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct ComputationData
+        internal struct ComputationData
         {
             /// <summary>
             /// Temporal block 1 to store intermediate and/or final computation results
@@ -122,7 +122,7 @@ namespace ImageSharp.Formats.Jpg
         /// <summary>
         /// Contains pointers to the memory regions of <see cref="ComputationData"/> so they can be easily passed around to pointer based utility methods of <see cref="Block8x8F"/>
         /// </summary>
-        public struct DataPointers
+        internal struct DataPointers
         {
             /// <summary>
             /// Pointer to <see cref="DecodedBlock.Block"/>

@@ -14,7 +14,7 @@ namespace ImageSharp
     /// <remarks>
     /// This is a very simplified implementation of a rational number designed for use with metadata only.
     /// </remarks>
-    public struct Rational : IEquatable<Rational>
+    internal struct Rational : IEquatable<Rational>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Rational"/> struct.

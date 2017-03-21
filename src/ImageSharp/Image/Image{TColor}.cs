@@ -75,7 +75,9 @@ namespace ImageSharp
                 }
             }
 
-            this.CopyProperties(other);
+            this.CurrentImageFormat = other.CurrentImageFormat;
+
+            this.MetaData.LoadFrom(other.MetaData);
         }
 
         /// <summary>
@@ -95,39 +97,15 @@ namespace ImageSharp
         public ImageMetaData MetaData { get; private set; } = new ImageMetaData();
 
         /// <summary>
-        /// Gets the width of the image in inches. It is calculated as the width of the image
-        /// in pixels multiplied with the density. When the density is equals or less than zero
-        /// the default value is used.
-        /// </summary>
-        /// <value>The width of the image in inches.</value>
-        public double InchWidth => this.Width / this.MetaData.HorizontalResolution;
-
-        /// <summary>
-        /// Gets the height of the image in inches. It is calculated as the height of the image
-        /// in pixels multiplied with the density. When the density is equals or less than zero
-        /// the default value is used.
-        /// </summary>
-        /// <value>The height of the image in inches.</value>
-        public double InchHeight => this.Height / this.MetaData.VerticalResolution;
-
-        /// <summary>
-        /// Gets a value indicating whether this image is animated.
-        /// </summary>
-        /// <value>
-        /// <c>True</c> if this image is animated; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsAnimated => this.Frames.Count > 0;
-
-        /// <summary>
         /// Gets the other frames for the animation.
         /// </summary>
         /// <value>The list of frame images.</value>
         public IList<ImageFrame<TColor>> Frames { get; } = new List<ImageFrame<TColor>>();
 
         /// <summary>
-        /// Gets the currently loaded image format.
+        /// Gets or sets the currently loaded image format.
         /// </summary>
-        public IImageFormat CurrentImageFormat { get; internal set; }
+        internal IImageFormat CurrentImageFormat { get; set; }
 
         /// <summary>
         /// Applies the processor to the image.
@@ -340,13 +318,14 @@ namespace ImageSharp
         /// <param name="scaleFunc">A function that allows for the correction of vector scaling between unknown color formats.</param>
         /// <typeparam name="TColor2">The pixel format.</typeparam>
         /// <returns>The <see cref="Image{TColor2}"/></returns>
-        public Image<TColor2> To<TColor2>(Func<Vector4, Vector4> scaleFunc = null)
+        internal Image<TColor2> To<TColor2>(Func<Vector4, Vector4> scaleFunc = null)
             where TColor2 : struct, IPixel<TColor2>
         {
             scaleFunc = PackedPixelConverterHelper.ComputeScaleFunction<TColor, TColor2>(scaleFunc);
 
             Image<TColor2> target = new Image<TColor2>(this.Width, this.Height, this.Configuration);
-            target.CopyProperties(this);
+
+            target.MetaData.LoadFrom(this.MetaData);
 
             using (PixelAccessor<TColor> pixels = this.Lock())
             using (PixelAccessor<TColor2> targetPixels = target.Lock())
@@ -393,18 +372,6 @@ namespace ImageSharp
             }
 
             base.Dispose(disposing);
-        }
-
-        /// <summary>
-        /// Copies the properties from the other <see cref="IImage"/>.
-        /// </summary>
-        /// <param name="other">
-        /// The other <see cref="IImage"/> to copy the properties from.
-        /// </param>
-        private void CopyProperties(IImage other)
-        {
-            this.CurrentImageFormat = other.CurrentImageFormat;
-            this.MetaData = new ImageMetaData(other.MetaData);
         }
     }
 }

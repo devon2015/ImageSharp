@@ -5,6 +5,8 @@
 
 namespace ImageSharp.Drawing.Pens
 {
+    using ImageSharp.Drawing.Brushes;
+
     /// <summary>
     /// Represents a <see cref="Pen{TColor}"/> in the <see cref="Color"/> color space.
     /// </summary>
@@ -38,6 +40,17 @@ namespace ImageSharp.Drawing.Pens
         /// <param name="pattern">The pattern.</param>
         public Pen(IBrush<Color> brush, float width, float[] pattern)
             : base(brush, width, pattern)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Pen"/> class.
+        /// </summary>
+        /// <param name="color">The color.</param>
+        /// <param name="width">The width.</param>
+        /// <param name="pattern">The pattern.</param>
+        public Pen(Color color, float width, float[] pattern)
+            : base(new SolidBrush(color), width, pattern)
         {
         }
 

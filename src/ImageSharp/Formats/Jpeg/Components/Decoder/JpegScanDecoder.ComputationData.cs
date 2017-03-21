@@ -16,7 +16,7 @@ namespace ImageSharp.Formats.Jpg
         /// Holds the "large" data blocks needed for computations.
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct ComputationData
+        internal struct ComputationData
         {
             /// <summary>
             /// The main input/working block

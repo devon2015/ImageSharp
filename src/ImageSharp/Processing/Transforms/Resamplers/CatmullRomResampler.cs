@@ -11,7 +11,7 @@ namespace ImageSharp.Processing
     /// scale image enlargements that a 'Lagrange' filter can produce.
     /// <see href="http://www.imagemagick.org/Usage/filter/#cubic_bc"/>
     /// </summary>
-    public class CatmullRomResampler : IResampler
+    public sealed class CatmullRomResampler : IResampler
     {
         /// <inheritdoc/>
         public float Radius => 2;

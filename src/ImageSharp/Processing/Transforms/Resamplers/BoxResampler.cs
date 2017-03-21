@@ -9,7 +9,7 @@ namespace ImageSharp.Processing
     /// The function implements the box algorithm. Similar to nearest neighbor when upscaling.
     /// When downscaling the pixels will average, merging together.
     /// </summary>
-    public class BoxResampler : IResampler
+    public sealed class BoxResampler : IResampler
     {
         /// <inheritdoc/>
         public float Radius => 0.5F;
